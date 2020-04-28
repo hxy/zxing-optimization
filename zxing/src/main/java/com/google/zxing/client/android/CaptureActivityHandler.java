@@ -36,7 +36,9 @@ import android.os.Message;
 import android.util.Log;
 
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * This class handles all the messaging which comprises the state machine for capture.
@@ -59,12 +61,11 @@ public final class CaptureActivityHandler extends Handler {
   }
 
   CaptureActivityHandler(CaptureActivity activity,
-                         Collection<BarcodeFormat> decodeFormats,
                          Map<DecodeHintType,?> baseHints,
                          String characterSet,
                          CameraManager cameraManager) {
     this.activity = activity;
-    decodeThread = new DecodeThread(activity, decodeFormats, baseHints, characterSet,
+    decodeThread = new DecodeThread(activity, baseHints, characterSet,
         new ViewfinderResultPointCallback(activity.getViewfinderView()));
     decodeThread.start();
     state = State.SUCCESS;

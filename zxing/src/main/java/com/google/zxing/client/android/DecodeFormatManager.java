@@ -16,14 +16,10 @@
 
 package com.google.zxing.client.android;
 
-import android.content.Intent;
-import android.net.Uri;
 import com.google.zxing.BarcodeFormat;
 
-import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -66,40 +62,5 @@ final class DecodeFormatManager {
   }
 
   private DecodeFormatManager() {}
-
-  static Set<BarcodeFormat> parseDecodeFormats(Intent intent) {
-    Iterable<String> scanFormats = null;
-    CharSequence scanFormatsString = intent.getStringExtra(Intents.Scan.FORMATS);
-    if (scanFormatsString != null) {
-      scanFormats = Arrays.asList(COMMA_PATTERN.split(scanFormatsString));
-    }
-    return parseDecodeFormats(scanFormats, intent.getStringExtra(Intents.Scan.MODE));
-  }
-
-  static Set<BarcodeFormat> parseDecodeFormats(Uri inputUri) {
-    List<String> formats = inputUri.getQueryParameters(Intents.Scan.FORMATS);
-    if (formats != null && formats.size() == 1 && formats.get(0) != null) {
-      formats = Arrays.asList(COMMA_PATTERN.split(formats.get(0)));
-    }
-    return parseDecodeFormats(formats, inputUri.getQueryParameter(Intents.Scan.MODE));
-  }
-
-  private static Set<BarcodeFormat> parseDecodeFormats(Iterable<String> scanFormats, String decodeMode) {
-    if (scanFormats != null) {
-      Set<BarcodeFormat> formats = EnumSet.noneOf(BarcodeFormat.class);
-      try {
-        for (String format : scanFormats) {
-          formats.add(BarcodeFormat.valueOf(format));
-        }
-        return formats;
-      } catch (IllegalArgumentException iae) {
-        // ignore it then
-      }
-    }
-    if (decodeMode != null) {
-      return FORMATS_FOR_MODE.get(decodeMode);
-    }
-    return null;
-  }
 
 }
