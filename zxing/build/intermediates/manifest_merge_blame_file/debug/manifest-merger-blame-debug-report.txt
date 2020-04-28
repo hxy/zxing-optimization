@@ -1,0 +1,334 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<!--
+3 Copyright (C) 2008 ZXing authors
+4
+5 Licensed under the Apache License, Version 2.0 (the "License");
+6 you may not use this file except in compliance with the License.
+7 You may obtain a copy of the License at
+8
+9      http://www.apache.org/licenses/LICENSE-2.0
+10
+11 Unless required by applicable law or agreed to in writing, software
+12 distributed under the License is distributed on an "AS IS" BASIS,
+13 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+14 See the License for the specific language governing permissions and
+15 limitations under the License.
+16-->
+17<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+18    package="com.google.zxing.client.android"
+19    android:installLocation="auto"
+20    android:versionCode="108"
+21    android:versionName="4.7.8" >
+22
+23    <uses-sdk
+24        android:minSdkVersion="19"
+24-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml
+25        android:targetSdkVersion="22" />
+25-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml
+26
+27    <uses-permission android:name="android.permission.CAMERA" />
+27-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:23:3-62
+27-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:23:20-60
+28    <uses-permission android:name="android.permission.INTERNET" />
+28-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:24:3-64
+28-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:24:20-62
+29    <uses-permission android:name="android.permission.VIBRATE" />
+29-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:25:3-63
+29-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:25:20-61
+30    <uses-permission android:name="android.permission.FLASHLIGHT" />
+30-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:26:3-66
+30-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:26:20-64
+31    <uses-permission android:name="android.permission.READ_CONTACTS" />
+31-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:27:3-69
+31-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:27:20-67
+32    <!-- unavailable in API 23 -->
+33    <uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS" />
+33-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:29:3-90
+33-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:29:20-88
+34    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+34-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:30:3-78
+34-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:30:20-76
+35    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+35-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:31:3-73
+35-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:31:20-71
+36    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+36-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:32:3-73
+36-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:32:20-71
+37
+38    <uses-feature android:name="android.hardware.camera.any" />
+38-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:34:3-61
+38-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:34:17-59
+39    <uses-feature
+39-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:35:3-92
+40        android:name="android.hardware.camera.autofocus"
+40-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:35:17-65
+41        android:required="false" />
+41-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:35:66-90
+42    <uses-feature
+42-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:36:3-88
+43        android:name="android.hardware.camera.flash"
+43-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:36:17-61
+44        android:required="false" />
+44-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:36:62-86
+45    <uses-feature android:name="android.hardware.screen.landscape" />
+45-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:37:3-67
+45-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:37:17-65
+46    <uses-feature
+46-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:38:3-80
+47        android:name="android.hardware.wifi"
+47-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:38:17-53
+48        android:required="false" />
+48-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:38:54-78
+49
+50    <application android:allowBackup="true" >
+50-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:40:3-133:17
+50-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:41:16-42
+51        <activity
+51-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:42:5-80:16
+52            android:name="com.google.zxing.client.android.CaptureActivity"
+52-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:42:15-46
+53            android:clearTaskOnLaunch="true"
+53-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:44:15-47
+54            android:screenOrientation="portrait"
+54-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:43:15-51
+55            android:stateNotNeeded="true"
+55-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:45:15-44
+56            android:theme="@style/CaptureTheme"
+56-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:46:15-50
+57            android:windowSoftInputMode="stateAlwaysHidden" >
+57-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:47:15-62
+58            <intent-filter>
+58-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:48:7-51:23
+59                <action android:name="com.google.zxing.client.android.SCAN" />
+59-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:49:9-70
+59-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:49:17-68
+60
+61                <category android:name="android.intent.category.DEFAULT" />
+61-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:50:9-67
+61-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:50:19-65
+62            </intent-filter>
+63            <!-- Allow web apps to launch Barcode Scanner by linking to http://zxing.appspot.com/scan. -->
+64            <intent-filter>
+64-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:53:7-58:23
+65                <action android:name="android.intent.action.VIEW" />
+65-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:54:9-60
+65-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:54:17-58
+66
+67                <category android:name="android.intent.category.DEFAULT" />
+67-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:50:9-67
+67-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:50:19-65
+68                <category android:name="android.intent.category.BROWSABLE" />
+68-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:56:9-69
+68-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:56:19-67
+69
+70                <data
+70-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:57:9-92
+71                    android:host="zxing.appspot.com"
+71-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:57:37-69
+72                    android:path="/scan"
+72-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:57:70-90
+73                    android:scheme="http" />
+73-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:57:15-36
+74            </intent-filter>
+75            <!-- We also support a Google Product Search URL. -->
+76            <intent-filter>
+76-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:60:7-65:23
+77                <action android:name="android.intent.action.VIEW" />
+77-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:54:9-60
+77-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:54:17-58
+78
+79                <category android:name="android.intent.category.DEFAULT" />
+79-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:50:9-67
+79-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:50:19-65
+80                <category android:name="android.intent.category.BROWSABLE" />
+80-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:56:9-69
+80-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:56:19-67
+81
+82                <data
+82-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:57:9-92
+83                    android:host="www.google.com"
+83-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:57:37-69
+84                    android:path="/m/products/scan"
+84-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:57:70-90
+85                    android:scheme="http" />
+85-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:57:15-36
+86            </intent-filter>
+87            <!-- And the UK version. -->
+88            <intent-filter>
+88-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:67:7-72:23
+89                <action android:name="android.intent.action.VIEW" />
+89-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:54:9-60
+89-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:54:17-58
+90
+91                <category android:name="android.intent.category.DEFAULT" />
+91-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:50:9-67
+91-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:50:19-65
+92                <category android:name="android.intent.category.BROWSABLE" />
+92-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:56:9-69
+92-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:56:19-67
+93
+94                <data
+94-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:57:9-92
+95                    android:host="www.google.co.uk"
+95-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:57:37-69
+96                    android:path="/m/products/scan"
+96-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:57:70-90
+97                    android:scheme="http" />
+97-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:57:15-36
+98            </intent-filter>
+99            <!-- Support zxing://scan/?... like iPhone app -->
+100            <intent-filter>
+100-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:74:7-79:23
+101                <action android:name="android.intent.action.VIEW" />
+101-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:54:9-60
+101-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:54:17-58
+102
+103                <category android:name="android.intent.category.DEFAULT" />
+103-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:50:9-67
+103-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:50:19-65
+104                <category android:name="android.intent.category.BROWSABLE" />
+104-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:56:9-69
+104-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:56:19-67
+105
+106                <data
+106-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:57:9-92
+107                    android:host="scan"
+107-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:57:37-69
+108                    android:path="/"
+108-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:57:70-90
+109                    android:scheme="zxing" />
+109-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:57:15-36
+110            </intent-filter>
+111        </activity>
+112        <activity
+112-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:81:5-83:46
+113            android:name="com.google.zxing.client.android.PreferencesActivity"
+113-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:81:15-50
+114            android:label="@string/preferences_name"
+114-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:82:15-55
+115            android:stateNotNeeded="true" />
+115-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:83:15-44
+116        <activity
+116-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:84:5-102:16
+117            android:name="com.google.zxing.client.android.encode.EncodeActivity"
+117-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:84:15-52
+118            android:stateNotNeeded="true" >
+118-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:85:15-44
+119            <intent-filter>
+119-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:86:7-89:23
+120                <action android:name="com.google.zxing.client.android.ENCODE" />
+120-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:87:9-72
+120-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:87:17-70
+121
+122                <category android:name="android.intent.category.DEFAULT" />
+122-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:50:9-67
+122-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:50:19-65
+123            </intent-filter>
+124            <!-- This allows us to handle the Share button in Contacts. -->
+125            <intent-filter>
+125-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:91:7-95:23
+126                <action android:name="android.intent.action.SEND" />
+126-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:92:9-60
+126-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:92:17-58
+127
+128                <category android:name="android.intent.category.DEFAULT" />
+128-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:50:9-67
+128-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:50:19-65
+129
+130                <data android:mimeType="text/x-vcard" />
+130-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:57:9-92
+130-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:94:15-46
+131            </intent-filter>
+132            <!-- This allows us to handle sharing any plain text . -->
+133            <intent-filter>
+133-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:97:7-101:23
+134                <action android:name="android.intent.action.SEND" />
+134-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:92:9-60
+134-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:92:17-58
+135
+136                <category android:name="android.intent.category.DEFAULT" />
+136-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:50:9-67
+136-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:50:19-65
+137
+138                <data android:mimeType="text/plain" />
+138-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:57:9-92
+138-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:94:15-46
+139            </intent-filter>
+140        </activity>
+141        <activity
+141-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:103:5-111:16
+142            android:name="com.google.zxing.client.android.book.SearchBookContentsActivity"
+142-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:103:15-62
+143            android:label="@string/sbc_name"
+143-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:104:15-47
+144            android:screenOrientation="sensorLandscape"
+144-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:106:15-58
+145            android:stateNotNeeded="true" >
+145-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:105:15-44
+146            <intent-filter>
+146-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:107:7-110:23
+147                <action android:name="com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" />
+147-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:108:9-86
+147-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:108:17-84
+148
+149                <category android:name="android.intent.category.DEFAULT" />
+149-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:50:9-67
+149-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:50:19-65
+150            </intent-filter>
+151        </activity>
+152        <activity
+152-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:112:5-119:16
+153            android:name="com.google.zxing.client.android.share.ShareActivity"
+153-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:112:15-50
+154            android:screenOrientation="user"
+154-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:114:15-47
+155            android:stateNotNeeded="true" >
+155-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:113:15-44
+156            <intent-filter>
+156-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:115:7-118:23
+157                <action android:name="com.google.zxing.client.android.SHARE" />
+157-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:116:9-71
+157-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:116:17-69
+158
+159                <category android:name="android.intent.category.DEFAULT" />
+159-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:50:9-67
+159-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:50:19-65
+160            </intent-filter>
+161        </activity>
+162        <activity
+162-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:120:5-122:46
+163            android:name="com.google.zxing.client.android.history.HistoryActivity"
+163-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:120:15-54
+164            android:label="@string/history_title"
+164-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:121:15-52
+165            android:stateNotNeeded="true" />
+165-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:122:15-44
+166        <activity
+166-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:123:5-125:46
+167            android:name="com.google.zxing.client.android.share.BookmarkPickerActivity"
+167-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:123:15-59
+168            android:label="@string/bookmark_picker_name"
+168-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:124:15-59
+169            android:stateNotNeeded="true" />
+169-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:125:15-44
+170        <activity
+170-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:126:5-128:46
+171            android:name="com.google.zxing.client.android.share.AppPickerActivity"
+171-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:126:15-54
+172            android:label="@string/app_picker_name"
+172-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:127:15-54
+173            android:stateNotNeeded="true" />
+173-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:128:15-44
+174        <activity
+174-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:129:5-132:46
+175            android:name="com.google.zxing.client.android.HelpActivity"
+175-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:129:15-43
+176            android:label="@string/menu_help"
+176-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:130:15-48
+177            android:screenOrientation="user"
+177-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:131:15-47
+178            android:stateNotNeeded="true" />
+178-->/Users/hy/testproject/ZxingOptimization/zxing/src/main/AndroidManifest.xml:132:15-44
+179    </application>
+180
+181</manifest>
