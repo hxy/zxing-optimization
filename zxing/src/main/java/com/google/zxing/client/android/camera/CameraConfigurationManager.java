@@ -201,6 +201,11 @@ final class CameraConfigurationManager {
     }
   }
 
+
+  int getCameraDisplayOrientation(){
+    return cwRotationFromDisplayToCamera;
+  }
+
   Point getBestPreviewSize() {
     return bestPreviewSize;
   }
