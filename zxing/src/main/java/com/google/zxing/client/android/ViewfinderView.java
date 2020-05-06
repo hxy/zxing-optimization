@@ -57,6 +57,10 @@ public final class ViewfinderView extends View {
   private List<ResultPoint> possibleResultPoints;
   private List<ResultPoint> lastPossibleResultPoints;
 
+  public static Long startTime = 0L;
+
+
+
   // This constructor is used when the class is built from an XML resource.
   public ViewfinderView(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -176,6 +180,7 @@ public final class ViewfinderView extends View {
   }
 
   public void addPossibleResultPoint(ResultPoint point) {
+    if(startTime==0L){startTime = System.currentTimeMillis();}
     List<ResultPoint> points = possibleResultPoints;
     synchronized (points) {
       points.add(point);

@@ -18,9 +18,9 @@ package com.google.zxing.client.android.camera;
 
 import android.graphics.Point;
 import android.hardware.Camera;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
+
+import com.google.zxing.client.android.DecodeThreadPoolExecutor;
 
 @SuppressWarnings("deprecation") // camera APIs
 final class PreviewCallback implements Camera.PreviewCallback {
@@ -28,29 +28,24 @@ final class PreviewCallback implements Camera.PreviewCallback {
   private static final String TAG = PreviewCallback.class.getSimpleName();
 
   private final CameraConfigurationManager configManager;
-  private Handler previewHandler;
-  private int previewMessage;
+
+  private DecodeThreadPoolExecutor decodeThreadPoolExecutor;
 
   PreviewCallback(CameraConfigurationManager configManager) {
     this.configManager = configManager;
   }
 
-  void setHandler(Handler previewHandler, int previewMessage) {
-    this.previewHandler = previewHandler;
-    this.previewMessage = previewMessage;
+  void setThreadPoolExecutor(DecodeThreadPoolExecutor executor) {
+    this.decodeThreadPoolExecutor = executor;
   }
 
   @Override
   public void onPreviewFrame(byte[] data, Camera camera) {
     Point cameraResolution = configManager.getCameraResolution();
-    Handler thePreviewHandler = previewHandler;
-    if (cameraResolution != null && thePreviewHandler != null) {
-      Message message = thePreviewHandler.obtainMessage(previewMessage, cameraResolution.x,
-          cameraResolution.y, data);
-      message.sendToTarget();
-      previewHandler = null;
+    if (cameraResolution != null && decodeThreadPoolExecutor!=null) {
+      decodeThreadPoolExecutor.executeDecode(data,cameraResolution.x,cameraResolution.y);
     } else {
-      Log.d(TAG, "Got preview callback, but no handler or resolution available");
+      Log.d(TAG, "Got preview callback, but no threadPoolExecutor or no resolution available");
     }
   }
 

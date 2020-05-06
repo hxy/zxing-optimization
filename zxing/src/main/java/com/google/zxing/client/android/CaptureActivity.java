@@ -113,7 +113,6 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
   private BeepManager beepManager;
   private AmbientLightManager ambientLightManager;
 
-  private long startTime = 0;
   ViewfinderView getViewfinderView() {
     return viewfinderView;
   }
@@ -497,7 +496,10 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
   // Put up our own UI for how to handle the decoded contents.
   private void handleDecodeInternally(Result rawResult, ResultHandler resultHandler, Bitmap barcode) {
-    Toast.makeText(CaptureActivity.this,"耗时："+(System.currentTimeMillis() - startTime),Toast.LENGTH_LONG).show();
+    Toast.makeText(CaptureActivity.this,"耗时："+(System.currentTimeMillis() - ViewfinderView.startTime),Toast.LENGTH_LONG).show();
+    Log.d("yue.huang","耗时："+(System.currentTimeMillis() - ViewfinderView.startTime));
+    ViewfinderView.startTime = 0L;
+
     maybeSetClipboard(resultHandler);
 
     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -693,7 +695,6 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     }
     try {
       cameraManager.openDriver(surfaceHolder);
-      startTime = System.currentTimeMillis();
       // Creating the handler starts the preview, which can also throw a RuntimeException.
       if (handler == null) {
         handler = new CaptureActivityHandler(this, decodeHints, characterSet, cameraManager);

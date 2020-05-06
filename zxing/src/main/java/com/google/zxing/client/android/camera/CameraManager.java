@@ -20,10 +20,10 @@ import android.content.Context;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.hardware.Camera;
-import android.os.Handler;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import com.google.zxing.PlanarYUVLuminanceSource;
+import com.google.zxing.client.android.DecodeThreadPoolExecutor;
 import com.google.zxing.client.android.camera.open.OpenCamera;
 import com.google.zxing.client.android.camera.open.OpenCameraInterface;
 
@@ -161,7 +161,7 @@ public final class CameraManager {
     }
     if (camera != null && previewing) {
       camera.getCamera().stopPreview();
-      previewCallback.setHandler(null, 0);
+      previewCallback.setThreadPoolExecutor(null);
       previewing = false;
     }
   }
@@ -192,13 +192,11 @@ public final class CameraManager {
    * in the message.obj field, with width and height encoded as message.arg1 and message.arg2,
    * respectively.
    *
-   * @param handler The handler to send the message to.
-   * @param message The what field of the message to be sent.
    */
-  public synchronized void requestPreviewFrame(Handler handler, int message) {
+  public synchronized void requestPreviewFrame(DecodeThreadPoolExecutor executor) {
     OpenCamera theCamera = camera;
     if (theCamera != null && previewing) {
-      previewCallback.setHandler(handler, message);
+      previewCallback.setThreadPoolExecutor(executor);
       theCamera.getCamera().setOneShotPreviewCallback(previewCallback);
     }
   }
@@ -259,10 +257,10 @@ public final class CameraManager {
         // Called early, before init even finished
         return null;
       }
-//      rect.left = rect.left * cameraResolution.x / screenResolution.x;
-//      rect.right = rect.right * cameraResolution.x / screenResolution.x;
-//      rect.top = rect.top * cameraResolution.y / screenResolution.y;
-//      rect.bottom = rect.bottom * cameraResolution.y / screenResolution.y;
+      rect.left = (int)(rect.left / 1.1);
+      rect.right = (int)(rect.right * 1.1);
+      rect.top = (int)(rect.top / 1.1);
+      rect.bottom = (int)(rect.bottom * 1.1);
       framingRectInPreview = rect;
     }
     return framingRectInPreview;

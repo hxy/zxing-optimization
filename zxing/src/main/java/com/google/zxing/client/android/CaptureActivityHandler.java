@@ -35,10 +35,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-import java.util.Collection;
-import java.util.EnumSet;
 import java.util.Map;
-import java.util.Set;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * This class handles all the messaging which comprises the state machine for capture.
@@ -50,7 +48,7 @@ public final class CaptureActivityHandler extends Handler {
   private static final String TAG = CaptureActivityHandler.class.getSimpleName();
 
   private final CaptureActivity activity;
-  private final DecodeThread decodeThread;
+  private final DecodeThreadPoolExecutor decodeThreadPoolExecutor;
   private State state;
   private final CameraManager cameraManager;
 
@@ -65,9 +63,8 @@ public final class CaptureActivityHandler extends Handler {
                          String characterSet,
                          CameraManager cameraManager) {
     this.activity = activity;
-    decodeThread = new DecodeThread(activity, baseHints, characterSet,
-        new ViewfinderResultPointCallback(activity.getViewfinderView()));
-    decodeThread.start();
+    decodeThreadPoolExecutor = new DecodeThreadPoolExecutor();
+    decodeThreadPoolExecutor.setDecodeParameters(activity,baseHints,characterSet);
     state = State.SUCCESS;
 
     // Start ourselves capturing previews and decoding.
@@ -98,7 +95,7 @@ public final class CaptureActivityHandler extends Handler {
     }else if(message.what == R.id.decode_failed){
       // We're decoding as fast as possible, so when one decode fails, start another.
       state = State.PREVIEW;
-      cameraManager.requestPreviewFrame(decodeThread.getHandler(), R.id.decode);
+      cameraManager.requestPreviewFrame(decodeThreadPoolExecutor);
     }else if(message.what == R.id.return_scan_result){
       activity.setResult(Activity.RESULT_OK, (Intent) message.obj);
       activity.finish();
@@ -140,14 +137,7 @@ public final class CaptureActivityHandler extends Handler {
   public void quitSynchronously() {
     state = State.DONE;
     cameraManager.stopPreview();
-    Message quit = Message.obtain(decodeThread.getHandler(), R.id.quit);
-    quit.sendToTarget();
-    try {
-      // Wait at most half a second; should be enough time, and onPause() will timeout quickly
-      decodeThread.join(500L);
-    } catch (InterruptedException e) {
-      // continue
-    }
+    decodeThreadPoolExecutor.shutdownNow();
 
     // Be absolutely sure we don't send any queued up messages
     removeMessages(R.id.decode_succeeded);
@@ -156,8 +146,9 @@ public final class CaptureActivityHandler extends Handler {
 
   private void restartPreviewAndDecode() {
     if (state == State.SUCCESS) {
+      DecodeThreadPoolExecutor.DECODE_SUCCEED = false;
       state = State.PREVIEW;
-      cameraManager.requestPreviewFrame(decodeThread.getHandler(), R.id.decode);
+      cameraManager.requestPreviewFrame(decodeThreadPoolExecutor);
       activity.drawViewfinder();
     }
   }
