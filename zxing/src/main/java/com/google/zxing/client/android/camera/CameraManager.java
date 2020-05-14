@@ -226,14 +226,14 @@ public final class CameraManager {
 
       int leftOffset = (screenResolution.x - width) / 2;
       int topOffset = (screenResolution.y - height) / 2;
-      framingRect = new Rect(leftOffset, topOffset, leftOffset + width, topOffset + height);
+      framingRect = new Rect(leftOffset, topOffset, leftOffset + width, topOffset + width);
       Log.d(TAG, "Calculated framing rect: " + framingRect);
     }
     return framingRect;
   }
 
   private static int findDesiredDimensionInRange(int resolution, int hardMin, int hardMax) {
-    int dim = 5 * resolution / 8; // Target 5/8 of each dimension
+    int dim = 5 * resolution / 9; // Target 5/8 of each dimension
     if (dim < hardMin) {
       return hardMin;
     }
@@ -259,10 +259,10 @@ public final class CameraManager {
         // Called early, before init even finished
         return null;
       }
-      rect.left = (int)(rect.left / 1.1);
-      rect.right = (int)(rect.right * 1.1);
-      rect.top = (int)(rect.top / 1.1);
-      rect.bottom = (int)(rect.bottom * 1.1);
+      rect.left = (int)(rect.left / 1.05);
+      rect.right = (int)(rect.right * 1.05);
+      rect.top = (int)(rect.top / 1.05);
+      rect.bottom = (int)(rect.bottom * 1.05);
       framingRectInPreview = rect;
     }
     return framingRectInPreview;
