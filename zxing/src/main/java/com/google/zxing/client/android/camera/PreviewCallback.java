@@ -44,6 +44,7 @@ final class PreviewCallback implements Camera.PreviewCallback {
     Point cameraResolution = configManager.getCameraResolution();
     if (cameraResolution != null && decodeThreadPoolExecutor!=null) {
       decodeThreadPoolExecutor.executeDecode(data,cameraResolution.x,cameraResolution.y);
+      if(DecodeThreadPoolExecutor.DECODE_SUCCEED){camera.setPreviewCallback(null);}
     } else {
       Log.d(TAG, "Got preview callback, but no threadPoolExecutor or no resolution available");
     }

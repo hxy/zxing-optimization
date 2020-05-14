@@ -160,6 +160,7 @@ public final class CameraManager {
       autoFocusManager = null;
     }
     if (camera != null && previewing) {
+      camera.getCamera().setPreviewCallback(null);
       camera.getCamera().stopPreview();
       previewCallback.setThreadPoolExecutor(null);
       previewing = false;
@@ -196,8 +197,9 @@ public final class CameraManager {
   public synchronized void requestPreviewFrame(DecodeThreadPoolExecutor executor) {
     OpenCamera theCamera = camera;
     if (theCamera != null && previewing) {
+      Log.d("decode_flow","0000");
       previewCallback.setThreadPoolExecutor(executor);
-      theCamera.getCamera().setOneShotPreviewCallback(previewCallback);
+      theCamera.getCamera().setPreviewCallback(previewCallback);
     }
   }
 
@@ -327,7 +329,6 @@ public final class CameraManager {
       return new PlanarYUVLuminanceSource(data, width, height, rect.left, rect.top,
               rect.width(), rect.height(), false);
     }
-
   }
 
 }

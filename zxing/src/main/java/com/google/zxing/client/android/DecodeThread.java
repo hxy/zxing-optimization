@@ -135,11 +135,6 @@ final class DecodeThread extends Thread {
         message.setData(bundle);
         message.sendToTarget();
       }
-    } else {
-      if (handler != null) {
-        Message message = Message.obtain(handler, R.id.decode_failed);
-        message.sendToTarget();
-      }
     }
   }
 
