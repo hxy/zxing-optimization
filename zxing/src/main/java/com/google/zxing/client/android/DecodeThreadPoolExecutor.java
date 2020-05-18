@@ -31,6 +31,6 @@ public class DecodeThreadPoolExecutor extends ThreadPoolExecutor {
 
 
     public void executeDecode(byte[] data, int width, int height){
-        execute(new DecodeThread(activity, hints, characterSet, new ViewfinderResultPointCallback(activity.getViewfinderView()),data,width,height));
+        execute(new DecodeThread(activity, hints, characterSet, new ViewfinderResultPointCallback(activity.getCameraManager()),data,width,height));
     }
 }

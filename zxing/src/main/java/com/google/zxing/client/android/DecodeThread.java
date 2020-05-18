@@ -25,6 +25,7 @@ import com.google.zxing.ReaderException;
 import com.google.zxing.Result;
 import com.google.zxing.ResultPointCallback;
 import com.google.zxing.common.GlobalHistogramBinarizer;
+import com.google.zxing.common.HybridBinarizer;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -112,7 +113,7 @@ final class DecodeThread extends Thread {
     Result rawResult = null;
     PlanarYUVLuminanceSource source = activity.getCameraManager().buildLuminanceSource(data, width, height);
     if (source != null && !DecodeThreadPoolExecutor.DECODE_SUCCEED) {
-      BinaryBitmap bitmap = new BinaryBitmap(new GlobalHistogramBinarizer(source));
+      BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
       try {
         rawResult = multiFormatReader.decodeWithState(bitmap);
       } catch (ReaderException re) {

@@ -496,10 +496,6 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
   // Put up our own UI for how to handle the decoded contents.
   private void handleDecodeInternally(Result rawResult, ResultHandler resultHandler, Bitmap barcode) {
-    Toast.makeText(CaptureActivity.this,"耗时："+(System.currentTimeMillis() - ViewfinderView.startTime),Toast.LENGTH_LONG).show();
-    Log.d("yue.huang","耗时："+(System.currentTimeMillis() - ViewfinderView.startTime));
-    ViewfinderView.startTime = 0L;
-
     maybeSetClipboard(resultHandler);
 
     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);

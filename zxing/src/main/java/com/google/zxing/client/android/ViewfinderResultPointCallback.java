@@ -18,18 +18,19 @@ package com.google.zxing.client.android;
 
 import com.google.zxing.ResultPoint;
 import com.google.zxing.ResultPointCallback;
+import com.google.zxing.client.android.camera.CameraManager;
 
 final class ViewfinderResultPointCallback implements ResultPointCallback {
 
-  private final ViewfinderView viewfinderView;
+  private final CameraManager cameraManager;
 
-  ViewfinderResultPointCallback(ViewfinderView viewfinderView) {
-    this.viewfinderView = viewfinderView;
+  ViewfinderResultPointCallback(CameraManager cameraManager) {
+    this.cameraManager = cameraManager;
   }
 
   @Override
   public void foundPossibleResultPoint(ResultPoint point) {
-    viewfinderView.addPossibleResultPoint(point);
+    cameraManager.addPossibleResultPoint(point);
   }
 
 }

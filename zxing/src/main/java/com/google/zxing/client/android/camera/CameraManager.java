@@ -23,11 +23,14 @@ import android.hardware.Camera;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import com.google.zxing.PlanarYUVLuminanceSource;
+import com.google.zxing.ResultPoint;
 import com.google.zxing.client.android.DecodeThreadPoolExecutor;
 import com.google.zxing.client.android.camera.open.OpenCamera;
 import com.google.zxing.client.android.camera.open.OpenCameraInterface;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This object wraps the Camera service object and expects to be the only one talking to it. The
@@ -331,4 +334,52 @@ public final class CameraManager {
     }
   }
 
+
+
+
+  private long lastZoomTime;
+  private int threshold = 2;
+  private int zoomMultiple = 4;
+  List<ResultPoint> possibleResultPoints = new ArrayList<>();
+  public void addPossibleResultPoint(ResultPoint point) {
+    List<ResultPoint> points = possibleResultPoints;
+    synchronized (points) {
+      points.add(point);
+      if(System.currentTimeMillis()-lastZoomTime>=1000){
+        int maxDistance = calculateMaxDistance(points, threshold);
+        if (maxDistance!=0 && maxDistance < getFramingRect().width()*2/3) {
+          Camera cameraDevices = camera.getCamera();
+          if (cameraDevices != null) {
+            Camera.Parameters params = cameraDevices.getParameters();
+            if (params.isZoomSupported()) {
+              int maxZoom = params.getMaxZoom();
+              int zoom = params.getZoom();
+              params.setZoom(Math.min(zoom + maxZoom / zoomMultiple, maxZoom));
+              cameraDevices.setParameters(params);
+              lastZoomTime = System.currentTimeMillis();
+              threshold += 1;
+              zoomMultiple += 1;
+              points.clear();
+            } else {
+              Log.i("Zoom", "Zoom not supported");
+            }
+          }
+        }
+      }
+    }
+  }
+
+  private int calculateMaxDistance(List<ResultPoint> points, int threshold){
+    if(threshold<2){return 0;}
+    int maxDistance = 0;
+    if(points.size()>=threshold){
+      for(int i=0;i<threshold-1;i++){
+        for(int j = i+1;j<threshold;j++){
+          float distance = ResultPoint.distance(points.get(i),points.get(j));
+          maxDistance = (int) Math.max(distance,maxDistance);
+        }
+      }
+    }
+    return maxDistance;
+  }
 }
