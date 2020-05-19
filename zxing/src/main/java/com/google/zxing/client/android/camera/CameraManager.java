@@ -101,8 +101,10 @@ public final class CameraManager {
     Camera cameraObject = theCamera.getCamera();
     Camera.Parameters parameters = cameraObject.getParameters();
     String parametersFlattened = parameters == null ? null : parameters.flatten(); // Save these, temporarily
+    int radius = getFramingRect().width()/2;
     try {
       configManager.setDesiredCameraParameters(theCamera, false);
+      configManager.setFocusArea(theCamera,-radius,-radius,radius,radius);
     } catch (RuntimeException re) {
       // Driver failed
       Log.w(TAG, "Camera rejected parameters. Setting only minimal safe-mode parameters");
@@ -114,6 +116,7 @@ public final class CameraManager {
         try {
           cameraObject.setParameters(parameters);
           configManager.setDesiredCameraParameters(theCamera, true);
+          configManager.setFocusArea(theCamera,-radius,-radius,radius,radius);
         } catch (RuntimeException re2) {
           // Well, darn. Give up
           Log.w(TAG, "Camera rejected even safe-mode parameters! No configuration");
@@ -338,16 +341,17 @@ public final class CameraManager {
 
 
   private long lastZoomTime;
-  private int threshold = 2;
+  private int threshold = 3;
   private int zoomMultiple = 4;
   List<ResultPoint> possibleResultPoints = new ArrayList<>();
   public void addPossibleResultPoint(ResultPoint point) {
     List<ResultPoint> points = possibleResultPoints;
     synchronized (points) {
+      if(lastZoomTime == 0){lastZoomTime = System.currentTimeMillis();}
       points.add(point);
-      if(System.currentTimeMillis()-lastZoomTime>=1000){
+      if(System.currentTimeMillis()-lastZoomTime>=500){
         int maxDistance = calculateMaxDistance(points, threshold);
-        if (maxDistance!=0 && maxDistance < getFramingRect().width()*2/3) {
+        if (maxDistance!=0 && maxDistance < getFramingRect().width()/3) {
           Camera cameraDevices = camera.getCamera();
           if (cameraDevices != null) {
             Camera.Parameters params = cameraDevices.getParameters();
@@ -356,8 +360,7 @@ public final class CameraManager {
               int zoom = params.getZoom();
               params.setZoom(Math.min(zoom + maxZoom / zoomMultiple, maxZoom));
               cameraDevices.setParameters(params);
-              lastZoomTime = System.currentTimeMillis();
-              threshold += 1;
+              threshold += 5;
               zoomMultiple += 1;
               points.clear();
             } else {
@@ -365,6 +368,8 @@ public final class CameraManager {
             }
           }
         }
+        lastZoomTime = System.currentTimeMillis();
+        points.clear();
       }
     }
   }
@@ -373,8 +378,10 @@ public final class CameraManager {
     if(threshold<2){return 0;}
     int maxDistance = 0;
     if(points.size()>=threshold){
-      for(int i=0;i<threshold-1;i++){
-        for(int j = i+1;j<threshold;j++){
+      int size = threshold;
+      if(points.size()>=threshold*1.5){ size = (int)(threshold*1.5); }
+      for(int i=0;i<size-1;i++){
+        for(int j = i+1;j<size;j++){
           float distance = ResultPoint.distance(points.get(i),points.get(j));
           maxDistance = (int) Math.max(distance,maxDistance);
         }

@@ -19,6 +19,7 @@ package com.google.zxing.client.android.camera;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.hardware.Camera;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -29,6 +30,9 @@ import android.view.WindowManager;
 import com.google.zxing.client.android.PreferencesActivity;
 import com.google.zxing.client.android.camera.open.CameraFacing;
 import com.google.zxing.client.android.camera.open.OpenCamera;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A class which deals with reading, parsing, and setting the camera parameters which are used to
@@ -138,7 +142,7 @@ final class CameraConfigurationManager {
     Log.i(TAG, "Preview size on screen: " + previewSizeOnScreen);
   }
 
-  void setDesiredCameraParameters(OpenCamera camera, boolean safeMode) {
+  void setDesiredCameraParameters(OpenCamera camera,boolean safeMode) {
 
     Camera theCamera = camera.getCamera();
     Camera.Parameters parameters = theCamera.getParameters();
@@ -258,4 +262,15 @@ final class CameraConfigurationManager {
     }
   }
 
+  public void setFocusArea(OpenCamera theCamera,int left,int top,int right,int bottom){
+    Camera camera = theCamera.getCamera();
+    Camera.Parameters parameters = camera.getParameters();
+    if (parameters.getMaxNumFocusAreas() > 0) { // Check if it is safe to set focusArea.
+      Rect focusRect = new Rect(left,top,right,bottom);
+      List<Camera.Area> mFocusList = new ArrayList<>();
+      mFocusList.add(new Camera.Area(focusRect, 1000));
+      parameters.setFocusAreas(mFocusList);
+      camera.setParameters(parameters);
+    }
+  }
 }
