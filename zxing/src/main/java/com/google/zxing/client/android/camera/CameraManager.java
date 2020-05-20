@@ -258,13 +258,21 @@ public final class CameraManager {
       if (framingRect == null) {
         return null;
       }
-      Rect rect = new Rect(framingRect);
       Point cameraResolution = configManager.getCameraResolution();
       Point screenResolution = configManager.getScreenResolution();
       if (cameraResolution == null || screenResolution == null) {
         // Called early, before init even finished
         return null;
       }
+
+      float xScale = cameraResolution.x/(float)screenResolution.x;
+      float yScale = cameraResolution.y/(float)screenResolution.y;
+      if(configManager.getCameraDisplayOrientation() == 90 || configManager.getCameraDisplayOrientation() == 270){
+        //此处默认屏幕是竖屏
+        xScale = cameraResolution.y/(float)screenResolution.x;
+        yScale = cameraResolution.x/(float)screenResolution.y;
+      }
+      Rect rect = new Rect((int)(framingRect.left*xScale),(int)(framingRect.top*yScale),(int)(framingRect.right*xScale),(int)(framingRect.bottom*yScale));
       rect.left = (int)(rect.left / 1.05);
       rect.right = (int)(rect.right * 1.05);
       rect.top = (int)(rect.top / 1.05);
